@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "apoiase"
+name = "apoios"
 version = "0.1.0"
 description = ""
 authors = ["dunossauro <mendesxeduardo@gmail.com>"]
