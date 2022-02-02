@@ -2,6 +2,7 @@ from os import listdir
 from pathlib import Path
 from splitty import clear_list_strings, chunks
 
+
 OUTPUT_FORMAT = '{0:20} {1:20} {2:20} {3:20}'
 coluns = 4
 
@@ -12,10 +13,10 @@ def get_last_csv(path):
 
 
 def apoiase():
-    with open(get_last_csv('apoiase')) as text:
-        base = clear_list_strings(text.read().split('\n'))
+    with open(get_last_csv('apoiase')) as apoiase_csv:
+        apoiase_data = clear_list_strings(apoiase_csv.readlines())
         names = [
-            x.split(',')[0].replace("\"", "") for x in base[1:]
+            x.split(',')[0].replace('\"', '') for x in apoiase_data[1:]
             if 'Ativo' in x
         ]
         names.append('Renan Moura')
@@ -23,18 +24,18 @@ def apoiase():
 
 
 def picpay():
-    with open(get_last_csv('picpay'), encoding='cp1252') as text:
-        base = clear_list_strings(text.read().split('\n'))
+    with open(get_last_csv('picpay'), encoding='cp1252') as picpay_csv:
+        picpay_data = clear_list_strings(picpay_csv.readlines())
         names = [
-            x.split(',')[0].replace("\"", "") for x in base[1:]
+            x.split(',')[0].replace("\"", "") for x in picpay_data[1:]
         ]
         return names
 
 
 def clube_de_canais():
-    with open('youtube/clube.txt') as text:
-        base = clear_list_strings(text.readlines())
-        nomes = [nome[0] for nome in chunks(base, 5)]
+    with open('youtube/clube.txt') as clube_de_canais:
+        youtube_data = clear_list_strings(clube_de_canais.readlines())
+        nomes = [nome[0] for nome in chunks(youtube_data, 5)]
         return nomes
 
 
