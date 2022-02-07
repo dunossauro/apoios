@@ -1,7 +1,9 @@
+from locale import setlocale, strxfrm, LC_ALL
 from os import listdir
 from pathlib import Path
 from splitty import clear_list_strings, chunks
 
+setlocale(LC_ALL, '')
 
 OUTPUT_FORMAT = '{0:20} {1:20} {2:20} {3:20}'
 coluns = 4
@@ -43,7 +45,7 @@ def parse_names(lista_de_nomes):
         f'{x.split()[0].capitalize()} {x.split()[-1].capitalize()}'
         for x in lista_de_nomes
     ]
-    return sorted(set(nomes))
+    return sorted(set(nomes), key=strxfrm)
 
 
 print(', '.join(parse_names(apoiase() + picpay() + clube_de_canais())))
