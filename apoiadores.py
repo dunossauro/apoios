@@ -2,7 +2,7 @@ from locale import LC_ALL, setlocale, strxfrm
 from os import listdir
 from pathlib import Path
 
-from splitty import chunks, clear_list_strings
+from splitty import clear_list_strings
 
 setlocale(LC_ALL, '')
 
@@ -32,10 +32,10 @@ def picpay():
 
 
 def clube_de_canais():
-    with open('youtube/clube.txt') as clube_txt:
+    with open(get_last_csv('youtube')) as clube_txt:
         youtube_data = clear_list_strings(clube_txt.readlines())
-        nomes = [nome[0] for nome in chunks(youtube_data, 5)]
-        return nomes
+        names = [x.split(',')[0] for x in youtube_data[1:]]
+        return names
 
 
 def parse_names(lista_de_nomes):
