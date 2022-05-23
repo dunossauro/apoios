@@ -7,7 +7,6 @@ authors = ["dunossauro <mendesxeduardo@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 splitty = "^0.0.8"
-python-youtube = "^0.8.1"
 
 [tool.poetry.dev-dependencies]
 blue = "^0.7.0"
