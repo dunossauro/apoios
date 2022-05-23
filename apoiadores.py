@@ -16,7 +16,7 @@ def apoiase():
     with open(get_last_csv('apoiase')) as apoiase_csv:
         apoiase_data = clear_list_strings(apoiase_csv.readlines())
         names = [
-            x.split(',')[0].replace('"', '')
+            x.split(',')[1].replace('"', '')
             for x in apoiase_data[1:]
             if 'Ativo' in x
         ]
