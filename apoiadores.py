@@ -20,7 +20,6 @@ def apoiase():
             for x in apoiase_data[1:]
             if 'Ativo' in x
         ]
-        names.append('Renan Moura')
         return names
 
 
