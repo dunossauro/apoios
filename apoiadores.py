@@ -43,9 +43,9 @@ def parse_name(name):
     last_name = splited_name[-1]
 
     if first_name == last_name:
-        return first_name
+        return first_name.capitalize()
 
-    return f'{first_name} {last_name}'
+    return f'{first_name.capitalize()} {last_name.capitalize()}'
 
 
 def parse_names(lista_de_nomes):
