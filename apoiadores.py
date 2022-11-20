@@ -37,11 +37,19 @@ def clube_de_canais():
         return names
 
 
+def parse_name(name):
+    splited_name = name.split()
+    first_name = splited_name[0]
+    last_name = splited_name[-1]
+
+    if first_name == last_name:
+        return first_name
+
+    return f'{first_name} {last_name}'
+
+
 def parse_names(lista_de_nomes):
-    nomes = [
-        f'{x.split()[0].capitalize()} {x.split()[-1].capitalize()}'
-        for x in lista_de_nomes
-    ]
+    nomes = [parse_name(name) for name in lista_de_nomes]
     return sorted(set(nomes), key=strxfrm)
 
 
