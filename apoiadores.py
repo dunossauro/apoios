@@ -1,4 +1,5 @@
 from locale import LC_ALL, setlocale, strxfrm
+from json import loads
 from os import listdir
 from pathlib import Path
 
@@ -53,4 +54,8 @@ def parse_names(lista_de_nomes):
     return sorted(set(nomes), key=strxfrm)
 
 
-print(', '.join(parse_names(apoiase() + picpay() + clube_de_canais())))
+def extra():
+    return loads(Path('extras.json').read_text())['pessoas']
+
+
+print(', '.join(parse_names(apoiase() + picpay() + clube_de_canais() + extra())))
