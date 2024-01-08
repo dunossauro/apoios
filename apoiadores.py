@@ -1,5 +1,5 @@
-from locale import LC_ALL, setlocale, strxfrm
 from json import loads
+from locale import LC_ALL, setlocale, strxfrm
 from os import listdir
 from pathlib import Path
 
@@ -21,13 +21,6 @@ def apoiase():
             for x in apoiase_data[1:]
             if 'Ativo' in x
         ]
-        return names
-
-
-def picpay():
-    with open(get_last_csv('picpay'), encoding='cp1252') as picpay_csv:
-        picpay_data = clear_list_strings(picpay_csv.readlines())
-        names = [x.split(',')[0].replace('"', '') for x in picpay_data[1:]]
         return names
 
 
@@ -58,4 +51,4 @@ def extra():
     return loads(Path('extras.json').read_text())['pessoas']
 
 
-print(', '.join(parse_names(apoiase() + picpay() + clube_de_canais() + extra())))
+print(', '.join(parse_names(apoiase() + clube_de_canais() + extra())))
