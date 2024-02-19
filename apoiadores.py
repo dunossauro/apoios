@@ -1,3 +1,4 @@
+from itertools import chain
 from json import loads
 from locale import LC_ALL, setlocale, strxfrm
 from os import listdir
@@ -16,11 +17,11 @@ def get_last_csv(path):
 def apoiase():
     with open(get_last_csv('apoiase')) as apoiase_csv:
         apoiase_data = clear_list_strings(apoiase_csv.readlines())
-        names = [
+        names = (
             x.split(',')[1].replace('"', '')
             for x in apoiase_data[1:]
             if 'Ativo' in x
-        ]
+        )
         return names
 
 
@@ -28,7 +29,8 @@ def clube_de_canais():
     with open(get_last_csv('youtube')) as clube_txt:
         youtube_data = clear_list_strings(clube_txt.readlines())
         names = [x.split(',')[0] for x in youtube_data[1:]]
-        return names
+        # O filtro filtra canais excluídos
+        return filter(None, names)
 
 
 def parse_name(name):
@@ -42,8 +44,8 @@ def parse_name(name):
     return f'{first_name.capitalize()} {last_name.capitalize()}'
 
 
-def parse_names(lista_de_nomes):
-    nomes = [parse_name(name) for name in lista_de_nomes]
+def parse_names(*lista_de_nomes):
+    nomes = (parse_name(name) for name in chain(*lista_de_nomes))
     return sorted(set(nomes), key=strxfrm)
 
 
@@ -51,4 +53,4 @@ def extra():
     return loads(Path('extras.json').read_text())['pessoas']
 
 
-print(', '.join(parse_names(apoiase() + clube_de_canais() + extra())))
+print(', '.join(parse_names(apoiase(), clube_de_canais(), extra())))
