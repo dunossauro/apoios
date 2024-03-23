@@ -17,22 +17,15 @@ def get_last_csv(path):
 def github():
     with open(get_last_csv('github')) as github_csv:
         github_data = clear_list_strings(github_csv.readlines())
-        names = (
-            x.split(',')[0]
-            for x in github_data[1:]
-        )
-        return names
+        return (x.split(',')[0] for x in github_data[1:])
 
 
 def patreon():
     with open(get_last_csv('patreon')) as patreon_csv:
         patreon_data = clear_list_strings(patreon_csv.readlines())
-        names = (
-            x.split(',')[0]
-            for x in patreon_data[1:]
-            if 'Active patron' in x
+        return (
+            x.split(',')[0] for x in patreon_data[1:] if 'Active patron' in x
         )
-        return names
 
 
 def apoiase():
@@ -74,4 +67,8 @@ def extra():
     return loads(Path('extras.json').read_text())['pessoas']
 
 
-print(', '.join(parse_names(apoiase(), clube_de_canais(), patreon(), github(), extra())))
+print(
+    ', '.join(
+        parse_names(apoiase(), clube_de_canais(), patreon(), github(), extra())
+    )
+)
