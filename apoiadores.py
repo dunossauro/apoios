@@ -14,6 +14,12 @@ def get_last_csv(path):
     return sorted(files, key=lambda x: Path(x).stat().st_mtime)[-1]
 
 
+def twitch():
+    with open(get_last_csv('twitch')) as twitch_csv:
+        twitch_data = clear_list_strings(twitch_csv.readlines())
+        return (x.split(',')[0] for x in twitch_data[1:])
+
+
 def github():
     with open(get_last_csv('github')) as github_csv:
         github_data = clear_list_strings(github_csv.readlines())
@@ -69,6 +75,13 @@ def extra():
 
 print(
     ', '.join(
-        parse_names(apoiase(), clube_de_canais(), patreon(), github(), extra())
+        parse_names(
+            apoiase(),
+            clube_de_canais(),
+            patreon(),
+            github(),
+            twitch(),
+            extra(),
+        )
     )
 )
